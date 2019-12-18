@@ -13,11 +13,6 @@ public class Absence {
         this.name = name;
         this.absenceTypes = absenceTypes;
     }
-
-    public AbsenceDate getAbsenceDate() {
-        return absenceDate;
-    }
-
     public String getName() {
         return name;
     }
@@ -32,7 +27,12 @@ public class Absence {
                 .count();
     }
 
-    public long countTotalAbsences(AbsenceType absenceType) {
+    public long countTotalAbsences() {
         return countAbsences(AbsenceType.X) + countAbsences(AbsenceType.I);
+    }
+
+    public boolean isAbsence(String nameOfDay, int lessonId) {
+        return absenceDate.isDay(nameOfDay) &&
+                (absenceTypes.get(lessonId) == AbsenceType.I || absenceTypes.get(lessonId) == AbsenceType.X);
     }
 }
